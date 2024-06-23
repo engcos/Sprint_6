@@ -9,12 +9,14 @@ class TestCreateOrder:
     @pytest.mark.parametrize(
         'name, surname, address, phone_number, comment',
         [
-            (name_1, surname_1, address_1, phone_number_1, comment_1),
-            (name_2, surname_2, address_2, phone_number_2, comment_2),
+            (OrderTestData.name_1, OrderTestData.surname_1, OrderTestData.address_1, OrderTestData.phone_number_1,
+             OrderTestData.comment_1),
+            (OrderTestData.name_2, OrderTestData.surname_2, OrderTestData.address_2, OrderTestData.phone_number_2,
+             OrderTestData.comment_2),
         ]
     )
     def test_create_order(self, driver, name, surname, address, phone_number, comment):
-        order_page = OrderPageScooter(driver, order_page_url)
+        order_page = OrderPageScooter(driver, URLs.order_page_url)
         order_page.fill_personal_info(name, surname, address, phone_number)
         order_page.fill_scooter_order_form(comment)
         order_page.confirm_order()
@@ -24,8 +26,8 @@ class TestCreateOrder:
     @allure.title('Verify redirection to the main page of Scooter')
     @allure.description('This test verifies that the returned text matches the expected value')
     def test_transition_main(self, driver):
-        order_page = OrderPageScooter(driver, order_page_url)
+        order_page = OrderPageScooter(driver, URLs.order_page_url)
         order_page.go_to_main_page()
 
-        assert order_page.get_main_page_text() == actual_text
+        assert order_page.get_main_page_text() == MainPageText.actual_text
 

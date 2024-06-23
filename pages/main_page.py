@@ -1,5 +1,6 @@
 from locators.main_locators import *
 from pages.base_page import *
+from data import URLs
 import allure
 
 class MainPage(BasePage):
